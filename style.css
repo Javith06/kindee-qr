@@ -1,0 +1,193 @@
+/* KinDee Table Card Generator - Styles */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@500;600;700&display=swap');
+
+:root {
+  --brand-orange: #EA580C;
+  --brand-purple: #4F1D96;
+}
+
+/* ── Body & Page ─────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  color: #f1f5f9;
+  min-height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Preview Wrapper ─────────────────────────────────────────────────────── */
+.preview-wrapper {
+  background: rgba(255,255,255,0.03);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5);
+  border-radius: 24px;
+  padding: 1.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  min-height: 320px;
+}
+
+/* ── THE CARD ────────────────────────────────────────────────────────────── */
+/*
+   A7 landscape = 105mm × 74mm
+   We render at 3× that: 315px × 222px in "natural" units,
+   but we actually build at 630px × 444px and scale it down
+   for preview. The key is width:height ratio = 105:74 ≈ 1.419
+*/
+#tableCard {
+  /* Exact A7 landscape ratio rendered at 2× for quality */
+  width: 840px;
+  height: 592px;
+  display: flex;
+  flex-direction: row;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  /* transform-origin must be center so the scale slider works */
+  transform-origin: center center;
+  flex-shrink: 0;
+}
+
+/* ── LEFT SIDEBAR (orange, ~34% width) ───────────────────────────────────── */
+.card-sidebar {
+  width: 34%;
+  height: 100%;
+  background: #EA580C;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 32px 16px 28px;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* White logo box */
+.logo-container {
+  width: 110px;
+  height: 110px;
+  background: #ffffff;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+  flex-shrink: 0;
+}
+
+.logo-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* SCAN & ORDER INSTANTLY */
+.slogan-text {
+  color: #ffffff;
+  font-family: 'Space Grotesk', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 1.5px;
+  text-align: center;
+  line-height: 1.35;
+  text-transform: uppercase;
+}
+
+/* Table Number box */
+.table-number-box {
+  width: 160px;
+  height: 160px;
+  background: #fff8f5;
+  border-radius: 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.14);
+  position: relative;
+  z-index: 3;
+  flex-shrink: 0;
+}
+
+.table-number-box .table-label {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 16px;
+  font-weight: 700;
+  color: #c2410c;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 0;
+  line-height: 1;
+}
+
+.table-number-box .table-value {
+  font-size: 72px;
+  font-weight: 900;
+  color: #1e293b;
+  line-height: 1;
+  font-family: 'Outfit', sans-serif;
+  letter-spacing: -2px;
+}
+
+/* Mandala decorative pattern behind table-number-box */
+.table-pattern-bg {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 220px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* ── RIGHT WHITE SECTION (66% width) ─────────────────────────────────────── */
+.card-content {
+  width: 66%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 28px;
+}
+
+/* QR frame – orange border, rounded */
+.qr-frame {
+  border: 5px solid #EA580C;
+  border-radius: 30px;
+  padding: 18px;
+  background: #ffffff;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Force QR canvas/img to consistent size */
+.qr-frame canvas,
+.qr-frame img {
+  width: 320px !important;
+  height: 320px !important;
+  display: block;
+}
+
+/* ── Scale slider pill ───────────────────────────────────────────────────── */
+.scale-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.05);
+  padding: 6px 14px;
+  border-radius: 12px;
+  font-size: 13px;
+}
