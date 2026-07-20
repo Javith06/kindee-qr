@@ -243,6 +243,7 @@
       position: relative;
       z-index: 2;
       flex-shrink: 0;
+      padding: 12px;
     }
     .table-tile .t-label {
       font-family: 'Oswald', sans-serif;
@@ -252,6 +253,7 @@
       letter-spacing: 5px;
       text-transform: uppercase;
       line-height: 1;
+      margin-bottom: 4px;
     }
     .table-tile .t-number {
       font-family: 'Roboto Condensed', sans-serif;
@@ -260,7 +262,12 @@
       color: #111827; /* Very dark gray/black matching the mockup exactly */
       line-height: 0.9;
       letter-spacing: -2px;
-      margin-top: 4px;
+      max-width: 100%;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: clip;
+      transition: font-size 0.15s ease;
     }
 
     /* Mandala pattern decoration */
@@ -427,9 +434,27 @@
     });
 
     // ── Live Updates ──────────────────────────────────────
-    tableInput.addEventListener('input', () => {
-      cardTable.textContent = tableInput.value.trim() || '??';
-    });
+    function updateTableNumber() {
+      const text = tableInput.value.trim() || '??';
+      cardTable.textContent = text;
+      
+      // Dynamically adjust font size to prevent overflow for longer text
+      if (text.length <= 2) {
+        cardTable.style.fontSize = '82px';
+      } else if (text.length === 3) {
+        cardTable.style.fontSize = '62px';
+      } else if (text.length === 4) {
+        cardTable.style.fontSize = '48px';
+      } else if (text.length === 5) {
+        cardTable.style.fontSize = '38px';
+      } else {
+        cardTable.style.fontSize = '30px';
+      }
+    }
+
+    tableInput.addEventListener('input', updateTableNumber);
+    // Run once on load to ensure proper styling initially
+    updateTableNumber();
 
     qrInput.addEventListener('input', () => {
       const url = qrInput.value.trim();
